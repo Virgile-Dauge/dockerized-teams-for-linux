@@ -1,11 +1,27 @@
 #+title: Dockerize microsoft Teams
 #+author: Virgile Daugé
+
+* Pré-requis
+
+- Testé sous Linux. (pop!_os 20.04)
+- docker https://docs.docker.com/engine/install/ubuntu/
+
 * Usage
 
 ! Ne support pas encore les webcams !
 #+BEGIN_SRC bash
-docker run --rm -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY --device /dev/snd/ teams:latest
+docker run --rm -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY --device /dev/snd/ virgiletn/teams-for-linux
 #+END_SRC
+
+Il est bien évidemment possible de créer un alias pour plus de simplicité :
+
+#+BEGIN_SRC bash
+echo 'alias teams="docker run --rm -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY --device /dev/snd/ virgiletn/teams-for-linux"' >> ~/.bashrc
+#+END_SRC
+
+!! teams-for-linux ne gére pas les signaux système, il n'est donc pas
+  possible en l'état de quitter proprement le container... !!
+#+RESULTS:
 
 
 * Pourquoi

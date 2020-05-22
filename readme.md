@@ -1,21 +1,38 @@
-- [Usage](#org52517fa)
-- [Pourquoi](#orgbabebb0)
-- [Dockerfile](#orgc8920e6)
+- [Pré-requis](#org7cc00db)
+- [Usage](#orgbd1c398)
+- [Pourquoi](#orgeeaf751)
+- [Dockerfile](#orgf8cef10)
 
 
 
-<a id="org52517fa"></a>
+<a id="org7cc00db"></a>
+
+# Pré-requis
+
+-   Testé sous Linux. (pop!<sub>os</sub> 20.04)
+-   docker <https://docs.docker.com/engine/install/ubuntu/>
+
+
+<a id="orgbd1c398"></a>
 
 # Usage
 
 ! Ne support pas encore les webcams !
 
 ```bash
-docker run --rm -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY --device /dev/snd/ teams:latest
+docker run --rm -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY --device /dev/snd/ virgiletn/teams-for-linux
 ```
 
+Il est bien évidemment possible de créer un alias pour plus de simplicité :
 
-<a id="orgbabebb0"></a>
+```bash
+echo 'alias teams="docker run --rm -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY --device /dev/snd/ virgiletn/teams-for-linux"' >> ~/.bashrc
+```
+
+!! teams-for-linux ne gére pas les signaux système, il n'est donc pas possible en l'état de quitter proprement le container&#x2026; !!
+
+
+<a id="orgeeaf751"></a>
 
 # Pourquoi
 
@@ -30,7 +47,7 @@ C'est pourquoi j'ai bricolé de quoi lancer "teams-for-linux" dans un container 
 teams-for-linux est un client teams non officiel dispo ici : <https://github.com/IsmaelMartinez/teams-for-linux>
 
 
-<a id="orgc8920e6"></a>
+<a id="orgf8cef10"></a>
 
 # Dockerfile
 
